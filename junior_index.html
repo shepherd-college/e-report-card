@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shepherd International College - Academic Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+     /* Keep all your existing styles intact */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+  
+
+        body {
+          background: linear-gradient(135deg, pink 0%, brown 100%);
+          min-height: 100vh;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 20px;
+        }
+
+       
+        body {
+            position: relative;
+            z-index: 1;
+        }
+       
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 50;
+            width: 100%;
+            height: 100%;
+            background: url('img/templogo1.jpg') no-repeat center center;
+            background-size: 300px 300px;
+            opacity: 0.1;
+            z-index: 0;
+            pointer-events: none;
+            background-color: white;
+            align-items: center;
+            text-align: center;
+        }
+          .logout-btn {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            background-color: crimson;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+       header {
+            background-color: darkred;
+            color: var(--header-text);
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+       
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+       
+        .logo {
+            width: 80px;
+            height: 80px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            font-weight: bold;
+            color: var(--primary-color);
+            border: 2px solid var(--secondary-color);
+        }
+       
+
+
+    .dashboard-container {
+      width: 100%;
+      max-width: 1000px;
+    }
+
+    .dashboard-card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+    }
+
+    /* Header */
+    .dashboard-header {
+      background: linear-gradient(135deg, darkred 0%, pink 100%);
+      color: white;
+      padding: 30px;
+      text-align: center;
+      position: relative;
+    }
+
+    .school-logo-container {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 4px solid white;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .school-logo {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 10px;
+    }
+
+    .logo-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #f0f7ff 0%, #e6f2ff 100%);
+      color: #1a5f23;
+      font-size: 36px;
+    }
+
+    .school-name h1 {
+      font-size: 1.8rem;
+      margin-bottom: 5px;
+    }
+
+    .school-name p {
+      opacity: 0.9;
+      font-size: 0.9rem;
+    }
+
+    /* Dashboard Content */
+    .dashboard-content {
+      padding: 40px;
+    }
+
+    .dashboard-title {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    .dashboard-title h2 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: #1a5f23;
+    }
+
+    .dashboard-title p {
+      color: #666;
+    }
+
+    /* Form Controls */
+    .form-group {
+      margin-bottom: 25px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #444;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .form-group label i {
+      color: #2a8c35;
+      width: 20px;
+    }
+
+    select {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid #e1e5eb;
+      border-radius: 10px;
+      font-size: 1rem;
+      background: white;
+      color: #333;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%231a5f23' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+    }
+
+    select:focus {
+      outline: none;
+      border-color: #2a8c35;
+      box-shadow: 0 0 0 3px rgba(42, 140, 53, 0.1);
+    }
+
+    /* Buttons */
+    .btn {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #2a8c35 0%, #1a5f23 100%);
+      color: white;
+      margin-bottom: 15px;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #1a5f23 0%, #0d3f14 100%);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(42, 140, 53, 0.3);
+    }
+
+    .btn-logout {
+      background: #f8f9fa;
+      color: #666;
+      border: 2px solid #e1e5eb;
+    }
+
+    .btn-logout:hover {
+      background: #f1f3f5;
+      transform: translateY(-2px);
+      border-color: #dc3545;
+      color: #dc3545;
+    }
+
+    /* Widget Display */
+    .widget-container {
+      background: #f8f9fa;
+      border-radius: 10px;
+      padding: 15px;
+      margin-top: 25px;
+      border-left: 4px solid #2a8c35;
+      display: none;
+    }
+
+    .widget-title {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 5px;
+    }
+
+    .widget-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .widget-item {
+      background: white;
+      padding: 8px 15px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      color: #444;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .widget-item i {
+      color: #2a8c35;
+    }
+
+    /* Footer */
+    .dashboard-footer {
+      text-align: center;
+      padding: 20px;
+      color: #999;
+      font-size: 0.8rem;
+      border-top: 1px solid #eee;
+    }
+
+    /* Logo error message */
+    .logo-error {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #666;
+      margin-top: 5px;
+      font-style: italic;
+    }
+  </style>
+</head>       
+<body>
+  
+        
+        
+        </header>
+  <div class="dashboard-container">
+    <div class="dashboard-card">
+               <header>
+            <!--<button class="admin-btn" onclick="goToAdmin()">Admin Panel</button>-->
+
+             <button class="logout-btn" onclick="logout()">Logout</button>
+            <div class="logo-container">
+                <div class="logo">
+                    <img src="img/templogo1.jpg" alt="School Logo">
+                </div>
+            </div>
+              </header>
+
+      <div class="dashboard-header">
+        <div class="school-logo-container">
+          <img src="img/templogo1.jpg" alt="Shepherd International College Logo" class="school-logo" id="schoolLogo" onerror="handleLogoError()">
+          <div class="logo-placeholder" id="logoPlaceholder" style="display: none;">
+            <i class="fas fa-graduation-cap"></i>
+          </div>
+        </div>
+        <div class="school-name">
+          <h1>Shepherd International College</h1>
+          <p>Academic Management System</p>
+        </div>
+        <p class="logo-error" id="logoErrorMessage" style="display: none;">Logo not found, using default icon</p>
+      </div>
+
+      <div class="dashboard-content">
+        <div class="dashboard-title">
+          <h2>Students Academic Records Portal</h2>
+          <p>Select class and subject to manage student records</p>
+        </div>
+
+        <form id="dashboardForm">
+          <div class="form-group">
+            <label for="classSelect"><i class="fas fa-users"></i> Select Class</label>
+            <select id="classSelect" required>
+              <option value="">-- Choose Class --</option>
+              <option value="JSS1">Junior Secondary School 1 (JSS1)</option>
+              <option value="JSS2">Junior Secondary School 2 (JSS2)</option>
+              <option value="JSS3">Junior Secondary School 3 (JSS3)</option>
+              <option value="SS1">Senior Secondary School 1 (SS1)</option>
+              <option value="SS2">Senior Secondary School 2 (SS2)</option>
+              <option value="SS3">Senior Secondary School 3 (SS3)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="subjectSelect"><i class="fas fa-book"></i> Select Subject</label>
+            <select id="subjectSelect" required>
+              <option value="">-- Choose Subject --</option>
+              <option value="Mathematics">Mathematics</option>
+              <option value="English">English Language</option>
+              <option value="Science">Basic Science</option>
+              <option value="SocialStudies">Social Studies</option>
+              <option value="Computer">Computer Studies</option>
+              <option value="Yoruba">Yoruba Language</option>
+              <option value="French">French</option>
+              <option value="CRK">Christian Religious Knowledge</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="termSelect"><i class="fas fa-calendar-alt"></i> Select Term</label>
+            <select id="termSelect" required>
+              <option value="">-- Choose Term --</option>
+              <option value="First">First Term</option>
+              <option value="Second">Second Term</option>
+              <option value="Third">Third Term</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="sessionSelect"><i class="fas fa-calendar"></i> Academic Session</label>
+            <select id="sessionSelect" required>
+              <option value="">-- Choose Session --</option>
+              <option value="2025/2026">2025/2026 Academic Session</option>
+              <option value="2026/2027">2026/2027 Academic Session</option>
+              <option value="2027/2028">2027/2028 Academic Session</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-arrow-right"></i> Access Records
+          </button>
+
+          <button type="button" class="btn btn-logout" id="logoutBtn">
+            <i class="fas fa-sign-out-alt"></i> Sign Out
+          </button>
+        </form>
+
+        <!-- Widget to show selected options -->
+        <div class="widget-container" id="selectionWidget">
+          <div class="widget-title">Current Selection:</div>
+          <div class="widget-content" id="widgetContent">
+            <div class="widget-item" id="widgetClass">
+              <i class="fas fa-users"></i> Class: Not selected
+            </div>
+            <div class="widget-item" id="widgetSubject">
+              <i class="fas fa-book"></i> Subject: Not selected
+            </div>
+            <div class="widget-item" id="widgetTerm">
+              <i class="fas fa-calendar-alt"></i> Term: Not selected
+            </div>
+            <div class="widget-item" id="widgetSession">
+              <i class="fas fa-calendar"></i> Session: Not selected
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dashboard-footer">
+        <p>Shepherd International College &copy; 2024</p>
+        <p>Version 2.0 | All data is securely stored locally</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // DOM Elements
+    const dashboardForm = document.getElementById('dashboardForm');
+    const classSelect = document.getElementById('classSelect');
+    const subjectSelect = document.getElementById('subjectSelect');
+    const termSelect = document.getElementById('termSelect');
+    const sessionSelect = document.getElementById('sessionSelect');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const schoolLogo = document.getElementById('schoolLogo');
+    const logoPlaceholder = document.getElementById('logoPlaceholder');
+    const logoErrorMessage = document.getElementById('logoErrorMessage');
+   
+    // Widget elements
+    const widgetClass = document.getElementById('widgetClass');
+    const widgetSubject = document.getElementById('widgetSubject');
+    const widgetTerm = document.getElementById('widgetTerm');
+    const widgetSession = document.getElementById('widgetSession');
+    const selectionWidget = document.getElementById('selectionWidget');
+
+    // Handle logo loading error
+    function handleLogoError() {
+      schoolLogo.style.display = 'none';
+      logoPlaceholder.style.display = 'flex';
+      logoErrorMessage.style.display = 'block';
+    }
+
+    // Load saved selections from localStorage
+    function loadSavedSelections() {
+      const savedClass = localStorage.getItem('selectedClass');
+      const savedSubject = localStorage.getItem('selectedSubject');
+      const savedTerm = localStorage.getItem('selectedTerm');
+      const savedSession = localStorage.getItem('selectedSession');
+
+      if (savedClass) classSelect.value = savedClass;
+      if (savedSubject) subjectSelect.value = savedSubject;
+      if (savedTerm) termSelect.value = savedTerm;
+      if (savedSession) sessionSelect.value = savedSession;
+
+      // Update widget
+      updateWidget();
+    }
+
+    // Update widget display
+    function updateWidget() {
+      const classValue = classSelect.value || 'Not selected';
+      const subjectValue = subjectSelect.value || 'Not selected';
+      const termValue = termSelect.value || 'Not selected';
+      const sessionValue = sessionSelect.value || 'Not selected';
+
+      widgetClass.innerHTML = `<i class="fas fa-users"></i> Class: ${classValue}`;
+      widgetSubject.innerHTML = `<i class="fas fa-book"></i> Subject: ${subjectValue}`;
+      widgetTerm.innerHTML = `<i class="fas fa-calendar-alt"></i> Term: ${termValue}`;
+      widgetSession.innerHTML = `<i class="fas fa-calendar"></i> Session: ${sessionValue}`;
+
+      // Show/hide widget based on selections
+      if (classSelect.value || subjectSelect.value || termSelect.value || sessionSelect.value) {
+        selectionWidget.style.display = 'block';
+      } else {
+        selectionWidget.style.display = 'none';
+      }
+    }
+
+    // Form submission handler
+    dashboardForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const selectedClass = classSelect.value;
+      const selectedSubject = subjectSelect.value;
+      const selectedTerm = termSelect.value;
+      const selectedSession = sessionSelect.value;
+
+      if (!selectedClass || !selectedSubject || !selectedTerm || !selectedSession) {
+        alert('Please select all options before proceeding.');
+        return;
+      }
+
+      // Save selections to localStorage
+      localStorage.setItem('selectedClass', selectedClass);
+      localStorage.setItem('selectedSubject', selectedSubject);
+      localStorage.setItem('selectedTerm', selectedTerm);
+      localStorage.setItem('selectedSession', selectedSession);
+
+      // Create the redirect URL
+      // Format: class_subject_records.html
+      const formattedClass = selectedClass.replace(/\s+/g, '');
+      const formattedSubject = selectedSubject.replace(/\s+/g, '');
+      const redirectUrl = `${formattedClass}_${formattedSubject}_records.html`;
+
+      // Show loading message
+      const submitBtn = dashboardForm.querySelector('.btn-primary');
+      const originalText = submitBtn.innerHTML;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Redirecting...';
+      submitBtn.disabled = true;
+
+      // Redirect after short delay
+      setTimeout(() => {
+        window.location.href = redirectUrl;
+      }, 1000);
+    });
+
+    // FIXED: Logout button handler
+    logoutBtn.addEventListener('click', function() {
+      console.log('Logout button clicked'); // Debug log
+     
+      if (confirm('Are you sure you want to sign out?')) {
+        // Clear all selections from localStorage
+        localStorage.removeItem('selectedClass');
+        localStorage.removeItem('selectedSubject');
+        localStorage.removeItem('selectedTerm');
+        localStorage.removeItem('selectedSession');
+       
+        // Show logout message
+        alert('You have been signed out successfully.');
+       
+        // Reset form
+        classSelect.value = '';
+        subjectSelect.value = '';
+        termSelect.value = '';
+        sessionSelect.value = '';
+       
+        // Update widget
+        updateWidget();
+       
+        // Focus on first select
+        classSelect.focus();
+      }
+    });
+
+    // Update widget when selections change
+    classSelect.addEventListener('change', updateWidget);
+    subjectSelect.addEventListener('change', updateWidget);
+    termSelect.addEventListener('change', updateWidget);
+    sessionSelect.addEventListener('change', updateWidget);
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('Dashboard loaded'); // Debug log
+      loadSavedSelections();
+     
+      // If all selections are already made, auto-focus the submit button
+      if (classSelect.value && subjectSelect.value && termSelect.value && sessionSelect.value) {
+        dashboardForm.querySelector('.btn-primary').focus();
+      }
+     
+      // Test the logout button
+      console.log('Logout button element:', logoutBtn);
+    });
+
+        function logout() {
+            sessionStorage.clear();
+            window.location.href = 'index.html';
+        }
+  </script>
+</body>
+</html>

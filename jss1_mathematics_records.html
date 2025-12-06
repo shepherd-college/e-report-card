@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shepherd International College - JSS1 Mathematics Records</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+    }
+
+    body {
+      background-color: #f8fafc;
+      background-image: url('https://images.unsplash.com/photo-1519074069444-1ba4fff66d16?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      min-height: 100vh;
+      padding: 20px;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.92);
+      z-index: -1;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Header with context info */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(135deg, #1a5f23 0%, #2a8c35 100%);
+      color: white;
+      padding: 15px 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      margin-bottom: 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+      background-size: cover;
+    }
+
+    .school-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .school-logo-container {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .school-logo {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 5px;
+    }
+
+    .logo-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #f0f7ff 0%, #e6f2ff 100%);
+      color: #1a5f23;
+      font-size: 24px;
+    }
+
+    .context-info h1 {
+      font-size: 1.5rem;
+      margin-bottom: 5px;
+    }
+
+    .context-info p {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    /* Context Widget */
+    .context-widget {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      padding: 10px 20px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .context-widget .widget-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 5px 0;
+      font-size: 0.9rem;
+    }
+
+    .context-widget .widget-item i {
+      width: 16px;
+    }
+
+    .user-controls {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .back-btn {
+      background: rgba(255, 255, 255, 0.15);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 50px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: translateY(-2px);
+    }
+
+    .logout-btn {
+      background: rgba(220, 53, 69, 0.8);
+      border: 2px solid rgba(220, 53, 69, 0.3);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 50px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .logout-btn:hover {
+      background: rgba(220, 53, 69, 1);
+      transform: translateY(-2px);
+    }
+
+    /* Main content */
+    .main-content {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 25px;
+    }
+
+    @media (max-width: 992px) {
+      .main-content {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Sidebar with info */
+    .sidebar {
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+      height: fit-content;
+    }
+
+    .sidebar-title {
+      font-size: 1.2rem;
+      color: #1a5f23;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .info-group {
+      margin-bottom: 20px;
+    }
+
+    .info-label {
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .info-value {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #1a293b;
+      padding: 8px 12px;
+      background: #f8fafc;
+      border-radius: 6px;
+      border-left: 4px solid #2a8c35;
+    }
+
+    .stats-container {
+      margin-top: 25px;
+    }
+
+    .stat-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .stat-label {
+      color: #64748b;
+    }
+
+    .stat-value {
+      font-weight: 600;
+      color: #1a5f23;
+    }
+
+    /* Card layout */
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+      padding: 25px;
+      margin-bottom: 25px;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      color: #1a5f23;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Table styling */
+    .table-container {
+      overflow-x: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+    }
+
+    th {
+      background: linear-gradient(to right, #2a8c35, #1a5f23);
+      color: white;
+      font-weight: 600;
+      text-align: left;
+      padding: 16px 12px;
+      position: relative;
+    }
+
+    th:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 20%;
+      height: 60%;
+      width: 1px;
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    td {
+      padding: 14px 12px;
+      border-bottom: 1px solid #e2e8f0;
+      transition: background 0.2s ease;
+    }
+
+    tr:hover td {
+      background: #f8fafc;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+
+    input[type="number"] {
+      width: 70px;
+      padding: 8px 10px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+    }
+
+    input[type="number"]:focus {
+      outline: none;
+      border-color: #2a8c35;
+      box-shadow: 0 0 0 3px rgba(42, 140, 53, 0.1);
+    }
+
+    .total-cell {
+      font-weight: 700;
+      color: #1a5f23;
+      font-size: 1.1rem;
+    }
+
+    /* Button controls */
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 25px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 12px 28px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(to right, #2a8c35, #1a5f23);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(to right, #1a5f23, #0d3f14);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(42, 140, 53, 0.3);
+    }
+
+    .btn-secondary {
+      background: linear-gradient(to right, #10b981, #059669);
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: linear-gradient(to right, #059669, #047857);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(16, 185, 129, 0.3);
+    }
+
+    .btn-tertiary {
+      background: linear-gradient(to right, #8b5cf6, #7c3aed);
+      color: white;
+    }
+
+    .btn-tertiary:hover {
+      background: linear-gradient(to right, #7c3aed, #6d28d9);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(139, 92, 246, 0.3);
+    }
+
+    /* Message styling */
+    #message {
+      text-align: center;
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      display: none;
+    }
+
+    .message-success {
+      background-color: #d1fae5;
+      color: #065f46;
+      border-left: 4px solid #10b981;
+      display: block !important;
+    }
+
+    .message-error {
+      background-color: #fee2e2;
+      color: #991b1b;
+      border-left: 4px solid #ef4444;
+      display: block !important;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #e2e8f0;
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
+
+      .context-widget {
+        width: 100%;
+      }
+
+      .user-controls {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .card-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
+
+      .controls {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      th, td {
+        padding: 12px 8px;
+      }
+
+      input[type="number"] {
+        width: 60px;
+      }
+    }
+     .logout-btn {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            background-color: crimson;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+     header {
+            background-color: darkred;
+            color: var(--header-text);
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+       
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+       
+        .logo {
+            width: 80px;
+            height: 80px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            font-weight: bold;
+            color: var(--primary-color);
+            border: 2px solid var(--secondary-color);
+        }
+  </style>
+</head>
+<body>
+    <header>
+            <!--<button class="admin-btn" onclick="goToAdmin()">Admin Panel</button>-->
+            <button class="logout-btn" onclick="logout()">Logout</button>
+            <div class="logo-container">
+                <div class="logo">
+                    <img src="img/templogo1.jpg" alt="School Logo">
+                </div>
+            </div>
+            
+        </header>
+        <center><p>2025/2026 FIRST TERM STUDENTS  RECORD SHEET ACADEMIC RECORDS </p></center>
+  <div class="container">
+    <!-- Header with context info -->
+    <header class="header">
+      <div class="school-info">
+        <div class="school-logo-container">
+          <img src="img/templogo1.jpg" alt="Shepherd International College Logo" class="school-logo" id="schoolLogo" onerror="handleLogoError()">
+          <div class="logo-placeholder" id="logoPlaceholder" style="display: none;">
+            <i class="fas fa-graduation-cap"></i>
+          </div>
+        </div>
+        <div class="context-info">
+          <h1 id="pageTitle">JSS1 Mathematics Records</h1>
+          <p id="pageSubtitle">Academic Session: 2025/2026 | Term: First</p>
+        </div>
+      </div>
+     
+      <div class="context-widget">
+        <div class="widget-item">
+          <i class="fas fa-users"></i>
+          <span id="widgetClassText">Class: JSS1</span>
+        </div>
+        <div class="widget-item">
+          <i class="fas fa-book"></i>
+          <span id="widgetSubjectText">Subject: Mathematics</span>
+        </div>
+        <div class="widget-item">
+          <i class="fas fa-calendar-alt"></i>
+          <span id="widgetTermText">Term: First</span>
+        </div>
+        <div class="widget-item">
+          <i class="fas fa-calendar"></i>
+          <span id="widgetSessionText">Session: 2025/2026</span>
+        </div>
+      </div>
+     
+      <div class="user-controls">
+        <button class="logout-btn" id="backBtn">
+          <i class="fas fa-sign-out-alt"></i> Back to Dashboard
+        </button>
+        <!--<button class="logout-btn" id="logoutBtn">
+          <i class="fas fa-sign-out-alt"></i> Sign Out
+        </button>-->
+      </div>
+    </header>
+
+    <!-- Main content -->
+    <div class="main-content">
+      <!-- Sidebar with context info -->
+      <aside class="sidebar">
+        <h3 class="sidebar-title"><i class="fas fa-info-circle"></i> Context Information</h3>
+       
+        <div class="info-group">
+          <div class="info-label"><i class="fas fa-users"></i> Selected Class</div>
+          <div class="info-value" id="infoClass">JSS1</div>
+        </div>
+       
+        <div class="info-group">
+          <div class="info-label"><i class="fas fa-book"></i> Selected Subject</div>
+          <div class="info-value" id="infoSubject">Mathematics</div>
+        </div>
+       
+        <div class="info-group">
+          <div class="info-label"><i class="fas fa-calendar-alt"></i> Academic Term</div>
+          <div class="info-value" id="infoTerm">First Term</div>
+        </div>
+       
+        <div class="info-group">
+          <div class="info-label"><i class="fas fa-calendar"></i> Academic Session</div>
+          <div class="info-value" id="infoSession">2025/2026</div>
+        </div>
+       
+        <div class="info-group">
+          <div class="info-label"><i class="fas fa-database"></i> Storage Key</div>
+          <div class="info-value" id="infoStorageKey">jss1_math_first_2025_2026</div>
+        </div>
+       
+        <div class="stats-container">
+          <h3 class="sidebar-title"><i class="fas fa-chart-bar"></i> Quick Stats</h3>
+          <div class="stat-item">
+            <span class="stat-label">Students in Class:</span>
+            <span class="stat-value" id="studentCount">5</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Average Score:</span>
+            <span class="stat-value" id="averageScore">80.8</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Highest Score:</span>
+            <span class="stat-value" id="highestScore">96</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Lowest Score:</span>
+            <span class="stat-value" id="lowestScore">68</span>
+          </div>
+        </div>
+       
+        <div style="margin-top: 25px; padding: 15px; background: #f0f9ff; border-radius: 8px; border-left: 4px solid #0ea5e9;">
+          <p style="font-size: 0.9rem; color: #0369a1; margin: 0;">
+            <i class="fas fa-lightbulb"></i> <strong>Tip:</strong> Scores are automatically saved to your browser's local storage.
+          </p>
+        </div>
+      </aside>
+
+      <!-- Main records card -->
+      <main class="card">
+        <div class="card-header">
+          <h2 class="card-title">
+            <i class="fas fa-calculator"></i> Student Records
+          </h2>
+          <div class="subject-info">
+            <p><strong>Maximum Scores:</strong> CA1 (20) | CA2 (20) | Assignment (10) | Exam (50)</p>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table id="recordsTable">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Student Name</th>
+                <th>CA1 (20)</th>
+                <th>CA2 (20)</th>
+                <th>Assignment (10)</th>
+                <th>Exam (50)</th>
+                <th>Total (100)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-id="1">
+                <td>1</td>
+                <td>John Doe</td>
+                <td><input type="number" min="0" max="20" class="ca1" value="15"></td>
+                <td><input type="number" min="0" max="20" class="ca2" value="18"></td>
+                <td><input type="number" min="0" max="10" class="ass" value="9"></td>
+                <td><input type="number" min="0" max="50" class="exam" value="42"></td>
+                <td class="total total-cell">84</td>
+              </tr>
+              <tr data-id="2">
+                <td>2</td>
+                <td>Mary Jane</td>
+                <td><input type="number" min="0" max="20" class="ca1" value="17"></td>
+                <td><input type="number" min="0" max="20" class="ca2" value="16"></td>
+                <td><input type="number" min="0" max="10" class="ass" value="8"></td>
+                <td><input type="number" min="0" max="50" class="exam" value="38"></td>
+                <td class="total total-cell">79</td>
+              </tr>
+              <tr data-id="3">
+                <td>3</td>
+                <td>James Smith</td>
+                <td><input type="number" min="0" max="20" class="ca1" value="12"></td>
+                <td><input type="number" min="0" max="20" class="ca2" value="14"></td>
+                <td><input type="number" min="0" max="10" class="ass" value="7"></td>
+                <td><input type="number" min="0" max="50" class="exam" value="35"></td>
+                <td class="total total-cell">68</td>
+              </tr>
+              <tr data-id="4">
+                <td>4</td>
+                <td>Linda Brown</td>
+                <td><input type="number" min="0" max="20" class="ca1" value="19"></td>
+                <td><input type="number" min="0" max="20" class="ca2" value="20"></td>
+                <td><input type="number" min="0" max="10" class="ass" value="10"></td>
+                <td><input type="number" min="0" max="50" class="exam" value="47"></td>
+                <td class="total total-cell">96</td>
+              </tr>
+              <tr data-id="5">
+                <td>5</td>
+                <td>Michael Green</td>
+                <td><input type="number" min="0" max="20" class="ca1" value="14"></td>
+                <td><input type="number" min="0" max="20" class="ca2" value="15"></td>
+                <td><input type="number" min="0" max="10" class="ass" value="8"></td>
+                <td><input type="number" min="0" max="50" class="exam" value="40"></td>
+                <td class="total total-cell">77</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="controls">
+          <button class="btn btn-primary" id="submitBtn">
+            <i class="fas fa-save"></i> Save Records
+          </button>
+          <button class="btn btn-secondary" id="retrieveBtn">
+            <i class="fas fa-download"></i> Retrieve Records
+          </button>
+          <button class="btn btn-tertiary" id="downloadBtn">
+            <i class="fas fa-file-export"></i> Download CSV
+          </button>
+        </div>
+
+        <p id="message"></p>
+      </main>
+    </div>
+
+    <footer class="footer">
+      <p>Shepherd International College &copy; 2025 | <span id="footerContext">JSS1 Mathematics - First Term 2025/2026</span></p>
+      <p>All records are stored locally in your browser | Page: <span id="pageIdentifier"></span></p>
+    </footer>
+  </div>
+
+  <script>
+    // DOM elements
+    const submitBtn = document.getElementById('submitBtn');
+    const retrieveBtn = document.getElementById('retrieveBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const backBtn = document.getElementById('backBtn');
+    const message = document.getElementById('message');
+    const table = document.getElementById('recordsTable').querySelector('tbody');
+    const schoolLogo = document.getElementById('schoolLogo');
+    const logoPlaceholder = document.getElementById('logoPlaceholder');
+
+    // Context elements
+    const pageTitle = document.getElementById('pageTitle');
+    const pageSubtitle = document.getElementById('pageSubtitle');
+    const widgetClassText = document.getElementById('widgetClassText');
+    const widgetSubjectText = document.getElementById('widgetSubjectText');
+    const widgetTermText = document.getElementById('widgetTermText');
+    const widgetSessionText = document.getElementById('widgetSessionText');
+    const infoClass = document.getElementById('infoClass');
+    const infoSubject = document.getElementById('infoSubject');
+    const infoTerm = document.getElementById('infoTerm');
+    const infoSession = document.getElementById('infoSession');
+    const infoStorageKey = document.getElementById('infoStorageKey');
+    const footerContext = document.getElementById('footerContext');
+    const pageIdentifier = document.getElementById('pageIdentifier');
+
+    // Stats elements
+    const studentCount = document.getElementById('studentCount');
+    const averageScore = document.getElementById('averageScore');
+    const highestScore = document.getElementById('highestScore');
+    const lowestScore = document.getElementById('lowestScore');
+
+    // Handle logo loading error
+    function handleLogoError() {
+      if (schoolLogo) {
+        schoolLogo.style.display = 'none';
+      }
+      if (logoPlaceholder) {
+        logoPlaceholder.style.display = 'flex';
+      }
+    }
+
+    // Get context from localStorage
+    function getContextFromStorage() {
+      const selectedClass = localStorage.getItem('selectedClass') || 'JSS1';
+      const selectedSubject = localStorage.getItem('selectedSubject') || 'Mathematics';
+      const selectedTerm = localStorage.getItem('selectedTerm') || 'First';
+      const selectedSession = localStorage.getItem('selectedSession') || '2025/2026';
+     
+      return { selectedClass, selectedSubject, selectedTerm, selectedSession };
+    }
+
+    // Generate storage key based on context
+    function generateStorageKey() {
+      const context = getContextFromStorage();
+      const classKey = context.selectedClass.toLowerCase().replace(/\s+/g, '');
+      const subjectKey = context.selectedSubject.toLowerCase().replace(/\s+/g, '_');
+      const termKey = context.selectedTerm.toLowerCase();
+      const sessionKey = context.selectedSession.replace(/\//g, '_');
+     
+      return `${classKey}_${subjectKey}_${termKey}_${sessionKey}`;
+    }
+
+    // Update page context
+    function updatePageContext() {
+      const context = getContextFromStorage();
+      const storageKey = generateStorageKey();
+     
+      // Update page title
+      pageTitle.textContent = `${context.selectedClass} ${context.selectedSubject} Records`;
+      pageSubtitle.textContent = `Academic Session: ${context.selectedSession} | Term: ${context.selectedTerm}`;
+     
+      // Update widgets
+      widgetClassText.textContent = `Class: ${context.selectedClass}`;
+      widgetSubjectText.textContent = `Subject: ${context.selectedSubject}`;
+      widgetTermText.textContent = `Term: ${context.selectedTerm}`;
+      widgetSessionText.textContent = `Session: ${context.selectedSession}`;
+     
+      // Update sidebar info
+      infoClass.textContent = context.selectedClass;
+      infoSubject.textContent = context.selectedSubject;
+      infoTerm.textContent = `${context.selectedTerm} Term`;
+      infoSession.textContent = context.selectedSession;
+      infoStorageKey.textContent = storageKey;
+     
+      // Update footer
+      footerContext.textContent = `${context.selectedClass} ${context.selectedSubject} - ${context.selectedTerm} Term ${context.selectedSession}`;
+      pageIdentifier.textContent = storageKey;
+    }
+
+    // Calculate stats
+    function calculateStats() {
+      const rows = table.querySelectorAll('tr');
+      let totalScore = 0;
+      let maxScore = 0;
+      let minScore = 100;
+     
+      rows.forEach(row => {
+        const score = parseInt(row.querySelector('.total').textContent) || 0;
+        totalScore += score;
+        if (score > maxScore) maxScore = score;
+        if (score < minScore) minScore = score;
+      });
+     
+      const count = rows.length;
+      const avg = count > 0 ? (totalScore / count).toFixed(1) : 0;
+     
+      studentCount.textContent = count;
+      averageScore.textContent = avg;
+      highestScore.textContent = maxScore;
+      lowestScore.textContent = minScore === 100 ? 0 : minScore;
+    }
+
+    // Calculate total when any input changes
+    table.addEventListener('input', (e) => {
+      if (e.target.classList.contains('ca1') ||
+          e.target.classList.contains('ca2') ||
+          e.target.classList.contains('ass') ||
+          e.target.classList.contains('exam')) {
+        const row = e.target.closest('tr');
+        calculateRowTotal(row);
+        calculateStats();
+      }
+    });
+
+    // Calculate total for a single row
+    function calculateRowTotal(row) {
+      const ca1 = parseFloat(row.querySelector('.ca1').value) || 0;
+      const ca2 = parseFloat(row.querySelector('.ca2').value) || 0;
+      const ass = parseFloat(row.querySelector('.ass').value) || 0;
+      const exam = parseFloat(row.querySelector('.exam').value) || 0;
+      const total = ca1 + ca2 + ass + exam;
+     
+      row.querySelector('.total').innerText = total;
+      return total;
+    }
+
+    // Calculate all totals initially
+    function initializeTable() {
+      Array.from(table.rows).forEach(row => {
+        calculateRowTotal(row);
+      });
+      calculateStats();
+    }
+
+    // Save records to localStorage
+    submitBtn.addEventListener('click', () => {
+      const storageKey = generateStorageKey();
+      let records = [];
+     
+      Array.from(table.rows).forEach(row => {
+        const id = row.dataset.id;
+        const studentName = row.cells[1].innerText;
+        const ca1 = parseFloat(row.querySelector('.ca1').value) || 0;
+        const ca2 = parseFloat(row.querySelector('.ca2').value) || 0;
+        const ass = parseFloat(row.querySelector('.ass').value) || 0;
+        const exam = parseFloat(row.querySelector('.exam').value) || 0;
+        const total = ca1 + ca2 + ass + exam;
+
+        records.push({ id, studentName, ca1, ca2, ass, exam, total });
+      });
+
+      localStorage.setItem(storageKey, JSON.stringify(records));
+      showMessage(`Records saved for ${generateStorageKey()}!`, "success");
+    });
+
+    // Retrieve records from localStorage
+    retrieveBtn.addEventListener('click', () => {
+      const storageKey = generateStorageKey();
+      const records = JSON.parse(localStorage.getItem(storageKey)) || [];
+     
+      if(records.length === 0){
+        showMessage(`No saved records found for ${storageKey}!`, "error");
+        return;
+      }
+
+      Array.from(table.rows).forEach(row => {
+        const record = records.find(r => r.id === row.dataset.id);
+        if(record){
+          row.querySelector('.ca1').value = record.ca1;
+          row.querySelector('.ca2').value = record.ca2;
+          row.querySelector('.ass').value = record.ass;
+          row.querySelector('.exam').value = record.exam;
+          row.querySelector('.total').innerText = record.total;
+        }
+      });
+
+      calculateStats();
+      showMessage(`Records retrieved for ${storageKey}!`, "success");
+    });
+
+    // Download records as CSV
+    downloadBtn.addEventListener('click', () => {
+      const storageKey = generateStorageKey();
+      const records = JSON.parse(localStorage.getItem(storageKey)) || [];
+      const context = getContextFromStorage();
+     
+      if(records.length === 0){
+        showMessage(`No records to download for ${storageKey}! Save records first.`, "error");
+        return;
+      }
+
+      // CSV header with context info
+      let csvContent = `Shepherd International College - ${context.selectedClass} ${context.selectedSubject} Records\n`;
+      csvContent += `Academic Session: ${context.selectedSession}, Term: ${context.selectedTerm}\n\n`;
+      csvContent += "ID,Student Name,CA1 (20),CA2 (20),Assignment (10),Exam (50),Total (100)\n";
+     
+      records.forEach(r => {
+        csvContent += `${r.id},${r.studentName},${r.ca1},${r.ca2},${r.ass},${r.exam},${r.total}\n`;
+      });
+
+      // Create a downloadable link
+      const blob = new Blob([csvContent], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${storageKey}_records.csv`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showMessage(`CSV file downloaded: ${storageKey}_records.csv`, "success");
+    });
+
+    // Back button handler
+    //backBtn.addEventListener('click', () => {
+    backBtn.addEventListener('click', function() {
+           console.log('Back button clicked on records page'); // Debug log
+     
+      if (confirm('Are you sure you want to return to Dashboard?')) {
+        // Clear all selections from localStorage
+        localStorage.removeItem('selectedClass');
+        localStorage.removeItem('selectedSubject');
+        localStorage.removeItem('selectedTerm');
+        localStorage.removeItem('selectedSession');
+       
+        // Redirect to Junior_index.html
+        window.location.href = 'junior_index.html';
+      }
+    });
+
+    // FIXED: Logout button handler
+    logoutBtn.addEventListener('click', function() {
+      console.log('Logout button clicked on records page'); // Debug log
+     
+      if (confirm('Are you sure you want to sign out? This will clear all selections.')) {
+        // Clear all selections from localStorage
+        localStorage.removeItem('selectedClass');
+        localStorage.removeItem('selectedSubject');
+        localStorage.removeItem('selectedTerm');
+        localStorage.removeItem('selectedSession');
+       
+        // Redirect to index.html
+        window.location.href = 'index.html';
+      }
+    });
+
+    // Show message function
+    function showMessage(text, type) {
+      message.textContent = text;
+      message.className = "";
+      message.classList.add(`message-${type}`);
+     
+      // Auto-hide message after 5 seconds
+      setTimeout(() => {
+        message.style.opacity = "0";
+        message.style.transition = "opacity 0.5s ease";
+        setTimeout(() => {
+          message.className = "";
+          message.style.opacity = "1";
+        }, 500);
+      }, 5000);
+    }
+
+    // Initialize page
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('Records page loaded'); // Debug log
+      updatePageContext();
+      initializeTable();
+     
+      // Try to load saved records for this context
+      const storageKey = generateStorageKey();
+      const savedRecords = localStorage.getItem(storageKey);
+      if (savedRecords) {
+        // Auto-retrieve after a short delay
+        setTimeout(() => {
+          retrieveBtn.click();
+          showMessage(`Auto-loaded saved records for ${storageKey}`, "success");
+        }, 500);
+      }
+     
+      // Test the logout button
+      console.log('Logout button element:', logoutBtn);
+    });
+
+      function logout() {
+            sessionStorage.clear();
+            window.location.href = 'index.html';
+        }
+
+  </script>
+</body>
+</html>
